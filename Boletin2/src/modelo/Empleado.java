@@ -42,9 +42,6 @@ public class Empleado {
         empleado2.setSiguiente(empleado3);
         empleado3.setSiguiente(empleado4);
         empleado4.setSiguiente(empleado5);
-        
-        
-        
 
         return empleado1; // Retorna el primer empleado de la lista
     }
