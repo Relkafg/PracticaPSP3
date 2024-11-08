@@ -9,15 +9,17 @@ public class Empleado {
     private GregorianCalendar fechaNacimiento;
     private double sueldo;
     private double sueldoMaximo;
+    private int edad;
     private Empleado siguiente; // Apunta al siguiente empleado en la lista enlazada
 
     // Constructor
-    public Empleado(String nombre, GregorianCalendar fechaNacimiento, double sueldo, double sueldoMaximo) {
+    public Empleado(String nombre, GregorianCalendar fechaNacimiento, double sueldo, double sueldoMaximo, int edad) {
         this.numeroEmpleado = ++contadorEmpleados;
         this.nombre = nombre;
         this.fechaNacimiento = fechaNacimiento;
         this.sueldo = sueldo;
         this.sueldoMaximo = sueldoMaximo;
+        this.edad = edad;
     }
 
     // Getters y Setters
@@ -26,16 +28,17 @@ public class Empleado {
     public GregorianCalendar getFechaNacimiento() { return fechaNacimiento; }
     public double getSueldo() { return sueldo; }
     public double getSueldoMaximo() { return sueldoMaximo; }
+    public int getEdad() { return edad; }
     public Empleado getSiguiente() { return siguiente; }
     public void setSiguiente(Empleado siguiente) { this.siguiente = siguiente; }
 
     // Método estático para crear y retornar la lista de empleados precargados
     public static Empleado generarListaEmpleados() {
-        Empleado empleado1 = new Empleado("Juan Perez", new GregorianCalendar(1985, 1, 15), 2000, 5000);
-        Empleado empleado2 = new Empleado("Ana Lopez", new GregorianCalendar(1990, 4, 25), 2500, 5500);
-        Empleado empleado3 = new Empleado("Luis Ramirez", new GregorianCalendar(1982, 8, 10), 2200, 5000);
-        Empleado empleado4 = new Empleado("Maria Garcia", new GregorianCalendar(1995, 2, 5), 2100, 5200);
-        Empleado empleado5 = new Empleado("Carlos Fernandez", new GregorianCalendar(1979, 11, 30), 2400, 5300);
+        Empleado empleado1 = new Empleado("Juan Perez", new GregorianCalendar(1985, 1, 15), 2000, 5000, 30);
+        Empleado empleado2 = new Empleado("Ana Lopez", new GregorianCalendar(1990, 4, 25), 2500, 5500, 27);
+        Empleado empleado3 = new Empleado("Luis Ramirez", new GregorianCalendar(1982, 8, 10), 2200, 5000, 48);
+        Empleado empleado4 = new Empleado("Iván Batista", new GregorianCalendar(1995, 2, 5), 2100, 5200, 21);
+        Empleado empleado5 = new Empleado("Daniel Fernández", new GregorianCalendar(1979, 11, 30), 2400, 5300, 20);
 
         // Crear la lista enlazada manualmente
         empleado1.setSiguiente(empleado2);

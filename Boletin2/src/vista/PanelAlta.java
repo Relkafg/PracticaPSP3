@@ -8,7 +8,7 @@ import java.util.GregorianCalendar;
 import java.text.ParseException;
 
 public class PanelAlta extends JPanel {
-    private JTextField txtNombre, txtFechaNacimiento, txtSueldo, txtSueldoMaximo;
+    private JTextField txtNombre, txtFechaNacimiento, txtSueldo, txtSueldoMaximo, txtEdad;
     private JButton btnAceptar, btnCancelar, btnVolverMenu;
     private JLabel lblError;
     private EmpleadoVista vista;
@@ -19,7 +19,7 @@ public class PanelAlta extends JPanel {
         setLayout(new BorderLayout());
 
         // Panel para los datos del empleado
-        JPanel panelDatos = new JPanel(new GridLayout(5, 2, 5, 5));
+        JPanel panelDatos = new JPanel(new GridLayout(6, 2, 5, 5));
         add(panelDatos, BorderLayout.CENTER);
 
         panelDatos.add(new JLabel("Nombre:"));
@@ -37,6 +37,10 @@ public class PanelAlta extends JPanel {
         panelDatos.add(new JLabel("Sueldo Máximo:"));
         txtSueldoMaximo = new JTextField();
         panelDatos.add(txtSueldoMaximo);
+        
+        panelDatos.add(new JLabel("Edad:"));
+        txtEdad = new JTextField();
+        panelDatos.add(txtEdad);
 
         // Panel para los botones
         JPanel panelBotones = new JPanel(new FlowLayout());
@@ -64,8 +68,9 @@ public class PanelAlta extends JPanel {
         String fechaNacimientoStr = txtFechaNacimiento.getText().trim();
         String sueldoStr = txtSueldo.getText().trim();
         String sueldoMaximoStr = txtSueldoMaximo.getText().trim();
+        String edadStr = txtEdad.getText().trim();
 
-        if (nombre.isEmpty() || fechaNacimientoStr.isEmpty() || sueldoStr.isEmpty() || sueldoMaximoStr.isEmpty()) {
+        if (nombre.isEmpty() || fechaNacimientoStr.isEmpty() || sueldoStr.isEmpty() || sueldoMaximoStr.isEmpty() || edadStr.isEmpty()) {
             lblError.setText("Todos los campos son obligatorios.");
             return;
         }
@@ -77,8 +82,9 @@ public class PanelAlta extends JPanel {
 
             double sueldo = Double.parseDouble(sueldoStr);
             double sueldoMaximo = Double.parseDouble(sueldoMaximoStr);
+            int edad = Integer.parseInt(edadStr);
 
-            Empleado nuevoEmpleado = new Empleado(nombre, fechaNacimiento, sueldo, sueldoMaximo);
+            Empleado nuevoEmpleado = new Empleado(nombre, fechaNacimiento, sueldo, sueldoMaximo, edad);
             vista.agregarEmpleado(nuevoEmpleado);
 
             lblError.setText("Empleado creado exitosamente!");
@@ -96,6 +102,7 @@ public class PanelAlta extends JPanel {
         txtFechaNacimiento.setText("");
         txtSueldo.setText("");
         txtSueldoMaximo.setText("");
+        txtEdad.setText("");
         lblError.setText("");
     }
 }

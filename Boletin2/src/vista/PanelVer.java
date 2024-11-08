@@ -6,7 +6,7 @@ import java.awt.*;
 import java.text.SimpleDateFormat;
 
 public class PanelVer extends JPanel {
-    private JTextField txtNombre, txtFechaNacimiento, txtSueldo, txtSueldoMaximo;
+    private JTextField txtNombre, txtFechaNacimiento, txtSueldo, txtSueldoMaximo, txtEdad;
     private JButton btnPrimero, btnAnterior, btnSiguiente, btnUltimo, btnVolverMenu;
     private JLabel lblError;
 
@@ -19,7 +19,7 @@ public class PanelVer extends JPanel {
 
         setLayout(new BorderLayout());
 
-        JPanel panelDatos = new JPanel(new GridLayout(4, 2, 5, 5)); // Datos en grid
+        JPanel panelDatos = new JPanel(new GridLayout(5, 2, 5, 5)); // Datos en grid
         add(panelDatos, BorderLayout.CENTER);
 
         panelDatos.add(new JLabel("Nombre:"));
@@ -41,6 +41,11 @@ public class PanelVer extends JPanel {
         txtSueldoMaximo = new JTextField();
         txtSueldoMaximo.setEditable(false);
         panelDatos.add(txtSueldoMaximo);
+        
+        panelDatos.add(new JLabel("Edado:"));
+        txtEdad = new JTextField();
+        txtEdad.setEditable(false);
+        panelDatos.add(txtEdad);
 
         // Panel para los botones
         JPanel panelBotones = new JPanel(new FlowLayout());
@@ -97,5 +102,6 @@ public class PanelVer extends JPanel {
         txtFechaNacimiento.setText(formatoFecha.format(empleado.getFechaNacimiento().getTime()));
         txtSueldo.setText(String.valueOf(empleado.getSueldo()));
         txtSueldoMaximo.setText(String.valueOf(empleado.getSueldoMaximo()));
+        txtEdad.setText(String.valueOf(empleado.getEdad()));
     }
 }
