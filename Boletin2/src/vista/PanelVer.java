@@ -11,10 +11,12 @@ public class PanelVer extends JPanel {
     private JLabel lblError;
 
     private Empleado empleadoActual;
+    private Empleado empleadoInicial;
     private EmpleadoVista vista;
 
     public PanelVer(Empleado empleadoInicial, EmpleadoVista vista) {
         this.empleadoActual = empleadoInicial;
+        this.empleadoInicial = empleadoInicial;
         this.vista = vista;
 
         setLayout(new BorderLayout());
@@ -41,8 +43,8 @@ public class PanelVer extends JPanel {
         txtSueldoMaximo = new JTextField();
         txtSueldoMaximo.setEditable(false);
         panelDatos.add(txtSueldoMaximo);
-        
-        panelDatos.add(new JLabel("Edado:"));
+
+        panelDatos.add(new JLabel("Edad:"));
         txtEdad = new JTextField();
         txtEdad.setEditable(false);
         panelDatos.add(txtEdad);
@@ -71,21 +73,33 @@ public class PanelVer extends JPanel {
 
         mostrarEmpleado(empleadoActual);
 
-        btnPrimero.addActionListener(e -> mostrarEmpleado(empleadoInicial));
+        // Acción del botón "Primero"
+        btnPrimero.addActionListener(e -> {
+            empleadoActual = empleadoInicial;  // Ajustar el empleado actual al primero de la lista
+            mostrarEmpleado(empleadoActual);
+        });
+
+        // Acción del botón "Último"
         btnUltimo.addActionListener(e -> {
-            while (empleadoActual.getSiguiente() != null) {
+            empleadoActual = empleadoInicial;
+            while (empleadoActual.getSiguiente() != null) { // Navegar hasta el último empleado
                 empleadoActual = empleadoActual.getSiguiente();
             }
             mostrarEmpleado(empleadoActual);
         });
+
+        // Acción del botón "Siguiente"
         btnSiguiente.addActionListener(e -> {
             if (empleadoActual.getSiguiente() != null) {
                 empleadoActual = empleadoActual.getSiguiente();
                 mostrarEmpleado(empleadoActual);
             }
         });
+
+        // Acción del botón "Anterior"
         btnAnterior.addActionListener(e -> {
             Empleado anterior = empleadoInicial;
+            // Recorrer la lista para encontrar el empleado anterior
             while (anterior != null && anterior.getSiguiente() != empleadoActual) {
                 anterior = anterior.getSiguiente();
             }
@@ -103,5 +117,18 @@ public class PanelVer extends JPanel {
         txtSueldo.setText(String.valueOf(empleado.getSueldo()));
         txtSueldoMaximo.setText(String.valueOf(empleado.getSueldoMaximo()));
         txtEdad.setText(String.valueOf(empleado.getEdad()));
+
+        // Desactivar o activar botones según la posición en la lista
+        actualizarEstadoBotones();
+    }
+
+    private void actualizarEstadoBotones() {
+        // Desactivar botones 'Primero' y 'Anterior' si el actual es el inicial
+        btnPrimero.setEnabled(empleadoActual != empleadoInicial);
+        btnAnterior.setEnabled(empleadoActual != empleadoInicial);
+
+        // Desactivar botones 'Siguiente' y 'Último' si no hay siguiente empleado
+        btnSiguiente.setEnabled(empleadoActual.getSiguiente() != null);
+        btnUltimo.setEnabled(empleadoActual.getSiguiente() != null);
     }
 }
