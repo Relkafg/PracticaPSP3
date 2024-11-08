@@ -11,7 +11,7 @@ public class PanelInformacion extends JPanel {
         this.vista = vista;
 
         setLayout(new BorderLayout());
-        JTextArea txtInfo = new JTextArea("Aplicación para gestionar empleados.\nAutor: [Tu Nombre]");
+        JTextArea txtInfo = new JTextArea("Aplicación para gestionar empleados.\nAutores: \nIván Batista Herrero \n Daniel Fernández Guzman");
         txtInfo.setEditable(false);
         add(txtInfo, BorderLayout.CENTER);
 
