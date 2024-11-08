@@ -19,8 +19,7 @@ public class EmpleadoControlador {
             return true;
         } catch (Exception e) {
             return false;
-        }
-        
+        } 
         
         
         
