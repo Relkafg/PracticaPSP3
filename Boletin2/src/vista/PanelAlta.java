@@ -1,9 +1,11 @@
 package vista;
 
-import javax.swing.*;
 import modelo.Empleado;
+import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.util.GregorianCalendar;
+import java.text.ParseException;
 
 public class PanelAlta extends JPanel {
     private JTextField txtNombre, txtFechaNacimiento, txtSueldo, txtSueldoMaximo;
@@ -45,11 +47,11 @@ public class PanelAlta extends JPanel {
         panelBotones.add(btnAceptar);
         panelBotones.add(btnCancelar);
         panelBotones.add(btnVolverMenu);
-        add(panelBotones, BorderLayout.SOUTH); // Añadir panel de botones al sur
+        add(panelBotones, BorderLayout.SOUTH);
 
         lblError = new JLabel("");
         lblError.setForeground(Color.RED);
-        add(lblError, BorderLayout.NORTH); // Colocar el mensaje de error en la parte superior
+        add(lblError, BorderLayout.NORTH);
 
         // Acciones de los botones
         btnAceptar.addActionListener(e -> crearEmpleado());
@@ -58,16 +60,35 @@ public class PanelAlta extends JPanel {
     }
 
     private void crearEmpleado() {
-        // Lógica para crear un nuevo empleado (validaciones y almacenamiento)
-        String nombre = txtNombre.getText();
-        String fechaNacimientoStr = txtFechaNacimiento.getText();
-        String sueldoStr = txtSueldo.getText();
-        String sueldoMaximoStr = txtSueldoMaximo.getText();
+        String nombre = txtNombre.getText().trim();
+        String fechaNacimientoStr = txtFechaNacimiento.getText().trim();
+        String sueldoStr = txtSueldo.getText().trim();
+        String sueldoMaximoStr = txtSueldoMaximo.getText().trim();
 
-        // Validar y crear el empleado
-        // Aquí deberías agregar tu lógica de validación y creación
-        lblError.setText("Empleado creado exitosamente!"); // Mensaje de éxito
-        limpiarCampos(); // Limpiar campos después de crear
+        if (nombre.isEmpty() || fechaNacimientoStr.isEmpty() || sueldoStr.isEmpty() || sueldoMaximoStr.isEmpty()) {
+            lblError.setText("Todos los campos son obligatorios.");
+            return;
+        }
+
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            GregorianCalendar fechaNacimiento = new GregorianCalendar();
+            fechaNacimiento.setTime(sdf.parse(fechaNacimientoStr));
+
+            double sueldo = Double.parseDouble(sueldoStr);
+            double sueldoMaximo = Double.parseDouble(sueldoMaximoStr);
+
+            Empleado nuevoEmpleado = new Empleado(nombre, fechaNacimiento, sueldo, sueldoMaximo);
+            vista.agregarEmpleado(nuevoEmpleado);
+
+            lblError.setText("Empleado creado exitosamente!");
+            limpiarCampos();
+
+        } catch (ParseException e) {
+            lblError.setText("Formato de fecha incorrecto. Use dd/MM/yyyy.");
+        } catch (NumberFormatException e) {
+            lblError.setText("Sueldo y sueldo máximo deben ser números.");
+        }
     }
 
     private void limpiarCampos() {
@@ -75,6 +96,6 @@ public class PanelAlta extends JPanel {
         txtFechaNacimiento.setText("");
         txtSueldo.setText("");
         txtSueldoMaximo.setText("");
-        lblError.setText(""); // Limpiar mensaje de error
+        lblError.setText("");
     }
 }

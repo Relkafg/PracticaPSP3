@@ -68,4 +68,18 @@ public class EmpleadoVista extends JFrame {
         revalidate();
         repaint();
     }
+
+    // Método para añadir un nuevo empleado a la lista enlazada
+    public void agregarEmpleado(Empleado nuevoEmpleado) {
+        Empleado ultimo = empleadoInicial;
+        while (ultimo.getSiguiente() != null) {
+            ultimo = ultimo.getSiguiente();
+        }
+        ultimo.setSiguiente(nuevoEmpleado);
+        System.out.println("Empleado agregado: " + nuevoEmpleado.getNombre());
+    }
+
+    public Empleado getEmpleadoInicial() {
+        return empleadoInicial;
+    }
 }
