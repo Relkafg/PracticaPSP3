@@ -14,7 +14,7 @@ public class PanelMenuPrincipal extends JPanel {
 
         btnVerEmpleados = new JButton("Ver Empleados");
         btnAltaEmpleado = new JButton("Alta Empleado");
-        btnAcercaDe = new JButton("Acerca de");
+        btnAcercaDe = new JButton("Información Autores");
         
      /* ************************ Establece un tamaño predeterminado de los botones *********************** */
         

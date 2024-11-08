@@ -31,7 +31,7 @@ public class EmpleadoVista extends JFrame {
         menu = new JMenu("Opciones");
         verEmpleados = new JMenuItem("Ver Empleados");
         altaEmpleado = new JMenuItem("Alta Empleado");
-        acercaDe = new JMenuItem("Acerca de");
+        acercaDe = new JMenuItem("Información Autores");
 
         menu.add(verEmpleados);
         menu.add(altaEmpleado);
